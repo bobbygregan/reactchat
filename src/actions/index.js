@@ -1,13 +1,12 @@
 import firebase from '../firebase';
 import DeviceInfo from 'react-native-device-info';
 import FCM, { FCMEvent, NotificationType, WillPresentNotificationResult, RemoteNotificationResult } from 'react-native-fcm';
-import { Platform, NativeModules} from 'react-native';
-import randomid from '../random.js'
+import { Platform } from 'react-native';
+
 export const addMessage = (msg) => ({
     type: 'ADD_MESSAGE',
     ...msg
 });
-var id = randomid()
 
 export const sendMessage = (text, user) => {
     return function (dispatch) {
@@ -101,7 +100,7 @@ export const login = () => {
                     const { name, avatar } = getState().user;
 
                     firebase.database()
-                            .ref(`users/${id}`)
+                            .ref(`users/${DeviceInfo.getUniqueID()}`)
                             .set({
                                 name,
                                 avatar
@@ -114,15 +113,12 @@ export const login = () => {
 
 export const checkUserExists = () => {
     return function (dispatch) {
-
-        console.log(firebase)
         dispatch(startAuthorizing());
-        console.log(NativeModules.RNDeviceInfo)
+
         firebase.auth()
                 .signInAnonymously()
                 .then(() => firebase.database()
-               
-                                    .ref(`users/${id}`)
+                                    .ref(`users/${DeviceInfo.getUniqueID()}`)
                                     .once('value', (snapshot) => {
                                         const val = snapshot.val();
 

@@ -10,6 +10,7 @@ apiKey: "AIzaSyCXwQfuc_RHn-crZTWnHfmJMUypYUwibBM",
     messagingSenderId: "301688987192"
   };
 
+
   firebase.initializeApp(config); 
 
    export default firebase;

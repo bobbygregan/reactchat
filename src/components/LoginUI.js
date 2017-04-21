@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactNative from 'react-native';
 import { Screen, Title, Text, Divider, Button, Spinner } from '@shoutem/ui';
+
 import Input from '../containers/Input';
 import LoginButton from '../containers/LoginButton';
 import { setUserName, setUserAvatar } from '../actions';
